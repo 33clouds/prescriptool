@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_05_170134) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_114612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_170134) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "meds_prescriptions", force: :cascade do |t|
+    t.string "dosage"
+    t.bigint "prescription_id", null: false
+    t.bigint "med_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["med_id"], name: "index_meds_prescriptions_on_med_id"
+    t.index ["prescription_id"], name: "index_meds_prescriptions_on_prescription_id"
   end
 
   create_table "prescriptions", force: :cascade do |t|
@@ -46,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_170134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "meds_prescriptions", "meds"
+  add_foreign_key "meds_prescriptions", "prescriptions"
   add_foreign_key "prescriptions", "users", column: "patient_id"
   add_foreign_key "prescriptions", "users", column: "professional_id"
 end
