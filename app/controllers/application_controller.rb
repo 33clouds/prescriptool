@@ -18,4 +18,3 @@ class ApplicationController < ActionController::Base
   end
 end
 
-["index", "show", "edi"]
