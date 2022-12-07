@@ -1,11 +1,11 @@
 class PrescriptionsController < ApplicationController
   def index
     @prescriptions = policy_scope(Prescription)
-    # @doc_p = @prescriptions.where()
+    @prescriptions = current_user.prescriptions_as_patient
   end
 
   def show
-    @prescription = Prescription.find(params[:id])
+    @prescription = current_user.prescriptions_as_patient.find(params[:id])
     authorize @prescription
   end
 end

@@ -1,0 +1,64 @@
+.card {
+  width: 300px;
+  height: 270px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.cards {
+  display: grid;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.qrcode {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.container-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.btn-gradient {
+  background-color: #aac4ff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 5px;
+}
+
+.content {
+  justify-content: center;
+  align-items: center;
+}
+
+.container-date {
+  margin-bottom: 20px;
+}
+.container-doctor {
+  margin-top: 20px;
+}
+
+.container-image {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
