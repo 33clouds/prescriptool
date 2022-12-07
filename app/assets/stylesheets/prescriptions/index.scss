@@ -1,6 +1,6 @@
-.card {
-  width: 300px;
-  height: 270px;
+#card {
+  width: 500px;
+  height: 400px;
   border-radius: 15px;
   background-color: white;
   padding: 20px;
@@ -8,30 +8,27 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.cards {
-  display: grid;
-  justify-content: center;
+#cards {
+  padding-bottom: 50px;
 }
 
 .title {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .qrcode {
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  margin-left: 300px;
 }
 
 .container-image {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
-  align-items: center;
   padding-bottom: 10px;
+  margin-left: 150px;
 }
 
 .btn-gradient {
@@ -40,25 +37,29 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-top: 5px;
+  margin-top: 30px;
 }
 
 .content {
   justify-content: center;
   align-items: center;
+  padding-top: 30px;
 }
 
 .container-date {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 .container-doctor {
   margin-top: 20px;
 }
 
-.container-image {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+#p1 {
+  text-decoration: underline;
+}
+
+#p2 {
+  color: rgb(220, 211, 211);
+  margin-top: 10px;
 }

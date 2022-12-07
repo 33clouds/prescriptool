@@ -14,7 +14,7 @@ Prescription.destroy_all
 User.destroy_all
 Med.destroy_all
 
-@dosages = ["one pill every morning", "two pills during lunch", "one pill before sleeping", "one pill two hours before eating"]
+@dosages = ["one pill every morning for one month", "two pills during lunch for two weeks", "one pill before sleeping during six months", "one pill two hours before eating for one week"]
 @meds = ["PARACETAMOL", "IBUPROFEN", "ASPIRIN", "ANXIOLITIC", "AMOXICCILIN", "ANTIHISTAMIN", "LOVENOX", "PYOSTACIN"]
 @specialties = ["CARDIOLOGIST", "RHEUMATOLOGIST", "RADIOLOGIST", "GP", "OPHTALMOLOGIST", "DERMATOLOGIST"]
 
