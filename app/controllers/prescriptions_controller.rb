@@ -13,7 +13,20 @@ class PrescriptionsController < ApplicationController
     # qrcode = RQRCode::QRCode.new("#{request.base_url}/prescriptions/#{@prescription.id}")
   end
 
+  def archive
+    @prescription = current_user.prescriptions_as_patient.find(params[:id])
+    authorize @prescription
+    @prescription.update(prescription_params)
+    redirect_to prescription_path(@prescription), notice: "Prescription scanned!"
+  end
+
   private
+
+  def prescription_params
+    params.require(:prescription).permit(
+      :archived
+    )
+  end
 
   def create_string(prescription)
     data_array = ""

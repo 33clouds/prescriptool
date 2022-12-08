@@ -1,1 +1,8 @@
-<%= render "qrcode", svg: @svg %>
+<% unless @prescription.archived? %>
+  <%# <%= render "qrcode", svg: @svg %>
+  <div class="container-button-archived">
+    <%= simple_form_for(@prescription, url: archive_prescription_path(@prescription)) do |f| %>
+      <%= f.input :archived, as: :boolean, input_html: { class: "toggle", onchange: 'this.form.submit()' }  %>
+    <% end %>
+  </div>
+<% end %>
