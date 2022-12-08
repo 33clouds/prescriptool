@@ -6,13 +6,10 @@ font-size: 30px;
 }
 
 .qrcode {
+  object-fit: contain;
   position: absolute;
   width: 100px;
   height: 100px;
   top: 100px;
   right: 20px;
-  img {
-    width: 100px;
-    height: 100px;
-  }
 }
