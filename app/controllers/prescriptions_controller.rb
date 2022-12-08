@@ -16,7 +16,6 @@ class PrescriptionsController < ApplicationController
   private
 
   def create_string(prescription)
-    @user = current_user
     data_array = ""
     data_array += "#{prescription.created_at.strftime('%a %d %b %Y')}\n"
     data_array += "Dr #{prescription.professional.last_name}\n"
