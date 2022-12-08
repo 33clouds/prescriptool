@@ -9,17 +9,7 @@ class PrescriptionsController < ApplicationController
   def show
     @prescription = Prescription.find(params[:id])
     authorize @prescription
-
-    # data_array = []
-    # @prescription.meds.each do |med|
-    #   data_array << {data: med.name, mode: :byte_8bit}
-    #   med.meds_prescriptions.each do |meds_prescription|
-    #     data_array << {data: meds_prescription.dosage, mode: :byte_8bit}
-    #   end
-    # end
-
     createqr_code(create_string(@prescription))
-
     # qrcode = RQRCode::QRCode.new("#{request.base_url}/prescriptions/#{@prescription.id}")
   end
 
@@ -27,6 +17,7 @@ class PrescriptionsController < ApplicationController
 
   def create_string(prescription)
     data_array = ""
+    data_array += "#{prescription.created_at.strftime('%a %d %b %Y')}\n"
     data_array += "Dr #{prescription.professional.last_name}\n"
     data_array += "Patient: #{prescription.patient.first_name} #{prescription.patient.last_name}\n"
     prescription.meds.each do |med|

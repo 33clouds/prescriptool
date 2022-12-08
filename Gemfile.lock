@@ -259,6 +259,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootsnap
   capybara
+  chunky_png
   debug
   devise
   dotenv-rails
