@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     member do
       patch :archive
     end
+    collection do
+      get :archived
+    end
   end
 
   root to: "pages#home"

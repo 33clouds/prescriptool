@@ -14,4 +14,9 @@ class PrescriptionPolicy < ApplicationPolicy
   def archive?
     show?
   end
+
+  def archived?
+    show?
+  end
+
 end
