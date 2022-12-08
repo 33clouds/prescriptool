@@ -1,6 +1,4 @@
-#card {
-  width: 500px;
-  height: 400px;
+.card {
   border-radius: 15px;
   background-color: white;
   padding: 20px;
@@ -8,7 +6,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-#cards {
+.cards {
   padding-bottom: 50px;
 }
 
@@ -19,15 +17,6 @@
 .qrcode {
   width: 40px;
   height: 40px;
-  margin-left: 300px;
-}
-
-.container-image {
-  width: 200px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 10px;
   margin-left: 150px;
 }
 
@@ -43,7 +32,7 @@
 .content {
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .container-date {
