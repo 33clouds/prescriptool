@@ -23,7 +23,7 @@ class PrescriptionsController < ApplicationController
     prescription.meds.each do |med|
       data_array += "#{med.name}: "
       med.meds_prescriptions.each do |meds_prescription|
-        data_array += "#{meds_prescription.dosage}\n"
+        data_array += "#{meds_prescription.dosage}\n" if prescription.id == meds_prescription.prescription_id
       end
     end
     data_array
@@ -34,7 +34,7 @@ class PrescriptionsController < ApplicationController
     @svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
-      module_size: 11,
+      module_size: 1,
       standalone: true,
       use_path: true
     )
