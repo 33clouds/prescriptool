@@ -1,0 +1,36 @@
+.footer-copyright .fa-solid {
+  color: #BF0F12;
+}
+
+.footer-copyright .fa-solid:hover {
+  font-size: 140%;
+  transition: ease 0.2s;
+}
+
+.footer-links a {
+  font-size: 150%;
+  margin: 0 2px;
+  color: $primary-color;
+}
+
+.footer {
+  display: flex;
+  // background-color: #2c2b2b;
+  align-items: center;
+  flex-direction: column;
+  padding: 60px;
+}
+
+.footer-links a:hover {
+  color: $header-color-darkgrey;
+  transition: ease-in-out 0.25s;
+}
+
+.footer-address {
+  color: $text-color-grey;
+  font-size: 14px;
+}
+
+.footer-copyright {
+  padding-top: 10px;
+}
