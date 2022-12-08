@@ -3,6 +3,7 @@
 h1{
 color: #B1B2FF;
 font-size: 30px;
+padding-top: 10px;
 }
 
 .qrcode {
@@ -12,4 +13,11 @@ font-size: 30px;
   height: 100px;
   top: 100px;
   right: 20px;
+svg{
+  padding: 10px;
+}
+}
+
+.seal {
+ padding-top: 400px;
 }
