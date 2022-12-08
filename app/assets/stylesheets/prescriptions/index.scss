@@ -1,0 +1,54 @@
+.card {
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.cards {
+  padding-bottom: 50px;
+}
+
+.title {
+  display: flex;
+}
+
+.qrcode {
+  width: 40px;
+  height: 40px;
+  margin-left: 150px;
+}
+
+.btn-gradient {
+  background-color: #aac4ff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.content {
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.container-date {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.container-doctor {
+  margin-top: 20px;
+}
+
+#p1 {
+  text-decoration: underline;
+}
+
+#p2 {
+  color: rgb(220, 211, 211);
+  margin-top: 10px;
+}
