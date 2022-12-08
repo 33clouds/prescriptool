@@ -1,7 +1,17 @@
+
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
+
     <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <div class="d-flex align-items-center">
+        <div class="brand-icon">
+          <i class="fa-regular fa-file-powerpoint"></i>
+        </div>
+        <div>
+          <h5 class="prescriptool-brand">Prescriptool</h5>
+          <p class="grey-text brand-subtitle">Generates unique prescriptions</p>
+        </div>
+      </div>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
