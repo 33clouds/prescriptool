@@ -8,6 +8,6 @@ class PrescriptionPolicy < ApplicationPolicy
   end
 
   def show?
-    user == self.user
+    true
   end
 end
