@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+MedsPrescription.destroy_all
+Prescription.destroy_all
 User.destroy_all
 Med.destroy_all
-Prescription.destroy_all
-MedsPrescription.destroy_all
 
 julie = User.new(first_name: "Julie", last_name: "Filstroff", email: "julie@gmail.com", password: "123456", pro: true)
 rodrigo = User.new(first_name: "Rodrigo", last_name: "Borges", email: "rodrigo@gmail.com", password: "123456")
@@ -23,3 +23,4 @@ med_presc = MedsPrescription.new(dosage: "1 every morning")
 med_presc.med = paracetamol
 med_presc.prescription = p
 p.save!
+med_presc.save!
