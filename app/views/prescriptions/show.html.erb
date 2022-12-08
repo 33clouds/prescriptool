@@ -6,11 +6,26 @@
         <p class="container-doctor">Doctor <%= @prescription.professional.address%></p>
   </div>
   <div>
-      <div class="qrcode">
-      <%= @svg.html_safe %>
-      </div>
+    <div class="qrcode">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <%= @svg.html_safe %>
+      </a>
+    </div>
   </div>
-  <div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center w-full mt-4">
+      <div class="modal-content w-50 rounded-4">
+        <div class="modal-body d-flex justify-content-center p-3">
+          <%= @svg_big.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="container">
     <p class="container-date"><%= @prescription.created_at.strftime('%a %d %b %Y') %></p>
     <div class="content">
       <p><u>Please deliver to <%= @prescription.patient.first_name%> <%=@prescription.patient.last_name %> </u></p>

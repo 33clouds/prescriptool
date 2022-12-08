@@ -1,9 +1,7 @@
-
-
-h1{
-color: #B1B2FF;
-font-size: 30px;
-padding-top: 10px;
+h1 {
+  color: #B1B2FF;
+  font-size: 24px;
+  padding-top: 10px;
 }
 
 .qrcode {
@@ -13,11 +11,16 @@ padding-top: 10px;
   height: 100px;
   top: 100px;
   right: 20px;
-svg{
-  padding: 10px;
+
+  svg {
+    padding: 10px;
+  }
 }
+
+.modal-body {
+  padding: 0px;
 }
 
 .seal {
- padding-top: 400px;
+  padding-top: 400px;
 }
