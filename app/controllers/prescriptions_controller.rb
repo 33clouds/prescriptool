@@ -1,19 +1,41 @@
 require "rqrcode"
 
 class PrescriptionsController < ApplicationController
+  before_action :find_by_id, only: [:show, :archive]
+
   def index
     @prescriptions = policy_scope(Prescription)
-    @prescriptions = current_user.prescriptions_as_patient
+    @prescriptions = current_user.prescriptions_as_patient.active
   end
 
   def show
-    @prescription = current_user.prescriptions_as_patient.find(params[:id])
     authorize @prescription
     createqr_code(create_string(@prescription))
     # qrcode = RQRCode::QRCode.new("#{request.base_url}/prescriptions/#{@prescription.id}")
   end
 
+  def archive
+    authorize @prescription
+    @prescription.update(prescription_params)
+    redirect_to archived_prescriptions_path, notice: "Prescription scanned!"
+  end
+
+  def archived
+    @prescriptions = current_user.prescriptions_as_patient.archived
+    authorize @prescriptions
+  end
+
   private
+
+  def prescription_params
+    params.require(:prescription).permit(
+      :archived
+    )
+  end
+
+  def find_by_id
+    @prescription = current_user.prescriptions_as_patient.find(params[:id])
+  end
 
   def create_string(prescription)
     data_array = ""
