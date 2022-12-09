@@ -12,6 +12,12 @@
   width: 40px;
 }
 
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 46px;
+  right: -1px;
+}
+
 .navbar-brand {
   padding: 0 !important;
 }
