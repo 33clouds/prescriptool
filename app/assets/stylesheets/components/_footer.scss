@@ -17,8 +17,15 @@
   display: flex;
   // background-color: #2c2b2b;
   align-items: center;
+  text-align: center;
   flex-direction: column;
-  padding: 60px;
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+// create spacing after elements in footer proportional to the font-size
+.footer * {
+  margin-bottom: 0.2rem;
 }
 
 .footer-links a:hover {
@@ -28,9 +35,9 @@
 
 .footer-address {
   color: $text-color-grey;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .footer-copyright {
-  padding-top: 10px;
+  font-size: 15px;
 }
