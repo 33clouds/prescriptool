@@ -1,23 +1,29 @@
-h1 {
-  color: #b1b2ff;
-  font-size: 30px;
-  padding-top: 10px;
-}
+// h1 {
+//   // color: #B1B2FF;
+//   // font-size: 22px;
+//   font-size: 1.1rem;
+//   padding-top: 10px;
+// }
 
 .qrcode {
   object-fit: contain;
-  position: absolute;
+  // position: absolute;
   width: 100px;
   height: 100px;
   top: 100px;
   right: 20px;
+
   svg {
     padding: 10px;
   }
 }
 
+.modal-body {
+  padding: 0px;
+}
+
 .seal {
-  padding-top: 400px;
+  padding-top: 75px;
 }
 
 .container-prescription {

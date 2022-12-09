@@ -12,6 +12,14 @@
   width: 40px;
 }
 
+// Quick fix for a navbar's profile pic dropdown
+// to actually appear as a dropdown on mobile.
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  top: 46px;
+  right: -1px;
+}
+
 .navbar-brand {
   padding: 0 !important;
 }
