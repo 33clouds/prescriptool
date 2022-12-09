@@ -12,17 +12,27 @@ $font-size-base: 1rem;
 // Colors
 $body-color: $header-color-darkgrey;
 // $gray;
-$primary:    $blue;
+$primary:    $primary-color;
+$secondary:  $secondary-color;
 $success:    $green;
 $info:       $yellow;
 $danger:     $red;
 $warning:    $orange;
 
 // Buttons & inputs' radius
-$border-radius:    2px;
-$border-radius-lg: 2px;
-$border-radius-sm: 2px;
+$border-radius:    8px;
+$border-radius-lg: 8px;
+$border-radius-sm: 8px;
 
 // Override other variables below!
 // $body-color: $header-color-darkgrey;
 $body-bg: $background-color;
+
+// Lower min contrast ratio.  This is to ensure that the
+// primary (violet) button gets white text.
+//
+// Bootstrap automatically picks button's text color
+// (white or black) based on the background color
+// ensuring that the resulting contrast is at least
+// as good as min contrast ratio.
+$min-contrast-ratio: 1.9;
