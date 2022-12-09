@@ -1,2 +1,36 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container home-container">
+  <div class="banner" style="background-image: url('./images/background-prescr.png');">
+      <div>
+        <div class="text-home">
+          <h1>All your prescriptions in one place</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum ultricies nisl eget faucibus. Nunc ultricies urna ut dolor egestas, eu elementum nisl.</p>
+        </div>
+        <div class="gd-choice">
+          <p><i class="fa-solid fa-medal"></i> Patients' Choice Approved App</p>
+        </div>
+        <div class="home-links">
+          <a href="/users/sign_up" class="btn btn-primary">Sign up now</a>
+          <a href="#" class="btn btn-secondary">Contact</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="container home-container">
+  <div>
+    <div class="row">
+      <div class="col home-card">
+        <%= image_tag "card1.svg" %>
+        <p>Proven reliability</p>
+      </div>
+      <div class="col home-card">
+        <%= image_tag "card2.svg" %>
+        <p>Efficiently sort your prescriptions</p>
+      </div>
+      <div class="col home-card">
+        <%= image_tag "card3.svg" %>
+        <p>Stop wasting time</p>
+      </div>
+    </div>
+  </div>
+</div>

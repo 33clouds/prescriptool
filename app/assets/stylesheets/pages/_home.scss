@@ -1,1 +1,57 @@
 // Specific CSS for your home-page
+.home-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+// even blocks have grey background
+.home-container:nth-child(2n+1) {
+  background-color: $alt-bground-color;
+}
+
+.gd-choice {
+  color: $primary-color;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.text-home p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: $text-color-grey;
+}
+
+.text-home h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 50px;
+  width: 354px;
+  height: 150px;
+  left: 18px;
+  top: 91.32px;
+}
+
+// .home-links {
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 15px;
+//   line-height: 17px;
+// }
+
+.home-card {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-card img {
+  width: 200px;
+  height: 150px;
+  margin: 12px;
+}
