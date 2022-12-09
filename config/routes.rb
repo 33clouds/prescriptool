@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :prescriptions, only: %i[index show]
+  resources :prescriptions, only: %i[index show] do
+    member do
+      patch :archive
+    end
+    collection do
+      get :archived
+    end
+  end
 
   root to: "pages#home"
 
