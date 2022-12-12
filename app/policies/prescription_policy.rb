@@ -3,7 +3,6 @@ class PrescriptionPolicy < ApplicationPolicy
     # NOTE: Be explicit about which records you allow access to!
     def resolve
       scope.where(patient: user)
-      # scope.all
     end
   end
 
@@ -19,4 +18,7 @@ class PrescriptionPolicy < ApplicationPolicy
     show?
   end
 
+  # def search?
+  #   show?
+  # end
 end

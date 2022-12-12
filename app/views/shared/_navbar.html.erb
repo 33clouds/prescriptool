@@ -1,5 +1,5 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" data-controller="search">
+  <div class="container-fluid d-flex justify-content-between" data-search-target="navbar">
     <%= link_to "/", class: "navbar-brand" do %>
       <div class="d-flex align-items-center">
         <div class="brand-icon">
@@ -11,6 +11,7 @@
         </div>
       </div>
     <% end %>
+    <div data-action="click->search#expand"><a class="my-2 my-sm-0"><i class="fa-solid fa-magnifying-glass"></i></a></div>
     <div id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -30,4 +31,16 @@
       </ul>
     </div>
   </div>
+
+  <%# We display this if the user clicks on the search icon %>
+  <form class="form-inline d-flex" action="<%= search_prescriptions_path %>">
+    <div class="container-fluid d-flex justify-content-between d-none" data-search-target="searchnavbar">
+      <a class="my-2 my-sm-0" data-action="click->search#expand">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <div class="search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+      </div>
+    </div>
+  </form>
 </div>

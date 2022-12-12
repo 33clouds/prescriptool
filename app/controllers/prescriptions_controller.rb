@@ -4,8 +4,11 @@ class PrescriptionsController < ApplicationController
   before_action :find_by_id, only: [:show, :archive]
 
   def index
-    @prescriptions = policy_scope(Prescription)
-    @prescriptions = current_user.prescriptions_as_patient.active
+    if params[:query].present?
+    else
+      @prescriptions = policy_scope(Prescription)
+      @prescriptions = current_user.prescriptions_as_patient.active
+    end
   end
 
   def show
@@ -23,6 +26,23 @@ class PrescriptionsController < ApplicationController
   def archived
     @prescriptions = current_user.prescriptions_as_patient.archived
     authorize @prescriptions
+  end
+
+  def search
+    @query = params[:query]
+    @results = PgSearch.multisearch(@query)
+    @prescriptions = []
+    @prescriptions = policy_scope(Prescription)
+    @prescriptions = current_user.prescriptions_as_patient.active
+    @results.each do |result|
+      if result.searchable_type == "User"
+        @prescriptions = result.searchable.prescriptions_as_professional
+        # authorize @prescriptions
+      else
+        @prescriptions = result.searchable.meds_prescriptions
+      end
+    end
+    render :index
   end
 
   private
