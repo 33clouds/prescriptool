@@ -1,0 +1,13 @@
+<h3 id="H1"> Doctor, please complete the form below </h3>
+<div class="container">
+  <%= simple_form_for @prescription do |f| %>
+    <%= f.association :patient, collection: User.patients, label_method: :full_name %>
+    <%= f.simple_fields_for @meds_prescription do |f| %>
+      <%= f.association :med, collection: Med.all %>
+      <%= f.input :dosage, collection: Prescription::DOSAGE %>
+    <% end %>
+    <div class="container-button">
+      <%= f.button :submit, class: 'btn btn-primary'%>
+    </div>
+  <% end %>
+</div>
