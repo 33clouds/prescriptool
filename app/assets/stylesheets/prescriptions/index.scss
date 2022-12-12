@@ -52,3 +52,15 @@
   color: rgb(220, 211, 211);
   margin-top: 10px;
 }
+
+.card {
+  .content {
+    display: none;
+  }
+}
+
+.card.expand {
+  .content {
+    display: block;
+  }
+}
