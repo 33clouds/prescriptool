@@ -6,6 +6,9 @@ class PrescriptionsController < ApplicationController
   def index
     @prescriptions = policy_scope(Prescription)
     @prescriptions = current_user.prescriptions_as_patient.active
+    @prescriptions_pro = current_user.prescriptions_as_professional.active
+    # should we do something like
+    # @prescriptions_as_professional = current_user.prescriptions_as_professional.active
   end
 
   def show
@@ -21,7 +24,8 @@ class PrescriptionsController < ApplicationController
   end
 
   def archived
-    @prescriptions = current_user.prescriptions_as_patient.archived
+    # @prescriptions = current_user.prescriptions_as_patient.archived
+    current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
     authorize @prescriptions
   end
 
@@ -34,7 +38,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def find_by_id
-    @prescription = current_user.prescriptions_as_patient.find(params[:id])
+    current_user.pro ? @prescription = current_user.prescriptions_as_professional.find(params[:id]) : @prescription = current_user.prescriptions_as_patient.find(params[:id])
   end
 
   def create_string(prescription)
