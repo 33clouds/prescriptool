@@ -6,6 +6,7 @@ class PrescriptionsController < ApplicationController
   def index
     @prescriptions = policy_scope(Prescription)
     @prescriptions = current_user.prescriptions_as_patient.active
+    @my_prescribed = current_user.prescriptions_as_professional.active
   end
 
   def show
@@ -25,12 +26,37 @@ class PrescriptionsController < ApplicationController
     authorize @prescriptions
   end
 
+  def new
+    @prescription = Prescription.new
+    @prescription.professional = current_user
+    @prescription.meds_prescriptions.build
+    @meds_prescription = MedsPrescription.new
+    # @prescription = current_user.prescriptions_as_professional.new
+    authorize @prescription
+  end
+
+  def create
+    @prescription = Prescription.new(prescription_params)
+    @prescription.professional = current_user
+    @meds_prescription = MedsPrescription.new
+    authorize @prescription
+
+    if @prescription.save
+      @md = MedsPrescription.new
+      @md.dosage = params[:prescription][:meds_prescription][:dosage]
+      @md.med = Med.find params[:prescription][:meds_prescription][:med_id]
+      @md.prescription = @prescription
+      @md.save
+      redirect_to prescriptions_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def prescription_params
-    params.require(:prescription).permit(
-      :archived
-    )
+    params.require(:prescription).permit(:patient_id, :archived)
   end
 
   def find_by_id
