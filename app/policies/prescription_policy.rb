@@ -19,4 +19,11 @@ class PrescriptionPolicy < ApplicationPolicy
     show?
   end
 
+  def new?
+    create?
+  end
+
+  def create?
+    @user.pro?
+  end
 end

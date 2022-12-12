@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :prescriptions, only: %i[index show] do
+  resources :prescriptions, only: %i[index show new create] do
     member do
       patch :archive
     end
