@@ -46,8 +46,8 @@ class PrescriptionsController < ApplicationController
 
   def archived
     # @prescriptions = current_user.prescriptions_as_patient.archived
+    policy_scope(Prescription)
     current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
-    authorize @prescriptions
   end
 
   def new
