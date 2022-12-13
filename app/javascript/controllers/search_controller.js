@@ -4,8 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets=['navbar', 'searchnavbar']
   connect() {
-    console.log(this.navbarTarget)
-    console.log(this.searchnavbarTarget)
   }
 
   expand() {
