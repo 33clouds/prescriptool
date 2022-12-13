@@ -7,7 +7,7 @@ class PrescriptionPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    record.patient == user || record.professional == user
   end
 
   def archive?
@@ -15,10 +15,9 @@ class PrescriptionPolicy < ApplicationPolicy
   end
 
   def archived?
-    show?
+    record.each do |r|
+      return false unless r.patient == user
+    end
+    return true
   end
-
-  # def search?
-  #   show?
-  # end
 end

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit? # to satisfy this verification, we need to use authorize @flat
-  after_action :verify_policy_scoped, only: %i[index search], unless: :skip_pundit? # to satisfy this verification, we need to use policy_scope(Flat)
+  after_action :verify_policy_scoped, only: :index, unless: :skip_pundit? # to satisfy this verification, we need to use policy_scope(Flat)
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized

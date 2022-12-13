@@ -33,13 +33,13 @@
   </div>
 
   <%# We display this if the user clicks on the search icon %>
-  <form class="form-inline d-flex" action="<%= search_prescriptions_path %>">
+  <form class="form-inline d-flex" action="<%= prescriptions_path %>">
     <div class="container-fluid d-flex justify-content-between d-none" data-search-target="searchnavbar">
       <a class="my-2 my-sm-0" data-action="click->search#expand">
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <div class="search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <input class="form-control mr-sm-2" type="search" placeholder="Doctor or medication" aria-label="Search" name="query">
       </div>
     </div>
   </form>
