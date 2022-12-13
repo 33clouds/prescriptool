@@ -12,3 +12,9 @@ application.register("prescription-list", PrescriptionListController)
 
 import SearchController from "./search_controller"
 application.register("search", SearchController)
+
+import ShowQrModalController from "./show_qr_modal_controller"
+application.register("show-qr-modal", ShowQrModalController)
+
+import StopPropagationController from "./stop_propagation_controller"
+application.register("stop-propagation", StopPropagationController)

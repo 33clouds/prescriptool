@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :prescriptions, only: %i[index show new create] do
     member do
       patch :archive
+      get :qr
     end
     collection do
       get :archived

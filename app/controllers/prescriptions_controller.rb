@@ -1,7 +1,7 @@
 require "rqrcode"
 
 class PrescriptionsController < ApplicationController
-  before_action :find_by_id, only: [:show, :archive]
+  before_action :find_by_id, only: [:show, :archive, :qr]
 
   def index
     @prescriptions = policy_scope(Prescription)
@@ -36,6 +36,12 @@ class PrescriptionsController < ApplicationController
     authorize @prescription
     createqr_code(create_string(@prescription))
     # qrcode = RQRCode::QRCode.new("#{request.base_url}/prescriptions/#{@prescription.id}")
+  end
+
+  def qr
+    authorize @prescription
+    createqr_code(create_string(@prescription))
+    render plain: @svg_big.html_safe, content_type: 'image/svg+xml'
   end
 
   def archive

@@ -10,6 +10,10 @@ class PrescriptionPolicy < ApplicationPolicy
     record.patient == user || record.professional == user
   end
 
+  def qr?
+    show?
+  end
+
   def archive?
     show?
   end

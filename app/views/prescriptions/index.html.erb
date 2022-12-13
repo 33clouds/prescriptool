@@ -30,20 +30,27 @@
           <% end %>
 
           <p>#<%= prescription.id %></p>
-          <%= image_tag "qrcode.jpeg", class: "qrcode" %>
+          <a href="#"
+             data-controller="stop-propagation" data-action="click->stop-propagation#click"
+             data-bs-toggle="modal" data-bs-target="#showQrModal" data-id="<%= prescription.id %>"
+          >
+            <%= image_tag "qrcode.jpeg", class: "qrcode" %>
+          </a>
 
         </div>
       </div>
     <% end %>
 
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal fade" id="showQrModal" tabindex="-1" aria-hidden="true"
+          data-controller="show-qr-modal" data-action="show.bs.modal->show-qr-modal#show"
+     >
         <div class="modal-dialog d-flex justify-content-center w-full mt-4">
           <div class="modal-content w-60 rounded-4">
             <div class="modal-header">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex justify-content-center p-3">
-              <%# <%= @svg_big.html_safe %> %>
+              <img data-show-qr-modal-target="qr">
             </div>
           </div>
         </div>
