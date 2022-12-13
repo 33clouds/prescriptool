@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :archived
     end
   end
+  resources :notifications, only: %i[index]
 
   root to: "pages#home"
 

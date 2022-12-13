@@ -1,0 +1,7 @@
+<% @notifications.each do |n| %>
+  <a href="/prescriptions" class="notification">
+    <div class="card">
+      <%= n.message %>
+    </div>
+  </a>
+<% end %>

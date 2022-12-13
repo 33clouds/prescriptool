@@ -1,30 +1,24 @@
 require "rqrcode"
 
 class PrescriptionsController < ApplicationController
-  before_action :find_by_id, only: [:show, :archive]
+  before_action :find_by_id, only: %i[show archive]
 
   def index
     @prescriptions = policy_scope(Prescription)
     @prescriptions_pro = current_user.prescriptions_as_professional.active
-    
+
     if params[:query].present?
       @query = params[:query]
       @results = PgSearch.multisearch(@query)
-      @prescriptions = []
       if @results.empty?
         @prescriptions = current_user.prescriptions_as_patient.active
         flash[:alert] = "No results found. Please try again."
       end
       @results.each do |result|
         if result.searchable_type == "User"
-          tmp = Prescription.where(professional: result.searchable, patient: current_user)
-          tmp.each do |prescription|
-            @prescriptions << prescription
-          end
+          @prescriptions = policy_scope(Prescription).where(professional: result.searchable, patient: current_user)
         else
-          result.searchable.meds_prescriptions.each do |meds_prescription|
-            @prescriptions << meds_prescription.prescription if meds_prescription.prescription.patient == current_user
-          end
+          @prescriptions = result.searchable.prescriptions.where(patient: current_user)
         end
       end
     else
@@ -66,6 +60,7 @@ class PrescriptionsController < ApplicationController
     authorize @prescription
 
     if @prescription.save
+      @notification = Notification.create(user: @prescription.patient, message: "You have a new prescription from Dr #{current_user.last_name}")
       @md = MedsPrescription.new
       @md.dosage = params[:prescription][:meds_prescription][:dosage]
       @md.med = Med.find params[:prescription][:meds_prescription][:med_id]
