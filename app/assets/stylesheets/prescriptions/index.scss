@@ -60,6 +60,9 @@
 }
 
 .card.expand {
+  .preview {
+    display: none;
+  }
   .content {
     display: block;
   }
