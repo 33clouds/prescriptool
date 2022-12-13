@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import PrescriptionListController from "./prescription_list_controller"
 application.register("prescription-list", PrescriptionListController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)

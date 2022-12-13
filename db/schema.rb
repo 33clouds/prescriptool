@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_204115) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_153101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_204115) do
     t.datetime "updated_at", null: false
     t.index ["med_id"], name: "index_meds_prescriptions_on_med_id"
     t.index ["prescription_id"], name: "index_meds_prescriptions_on_prescription_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
   create_table "prescriptions", force: :cascade do |t|
