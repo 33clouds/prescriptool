@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :prescriptions, only: %i[index show new create] do
     member do
-      patch :archive
+      get :archive
     end
     collection do
       get :archived

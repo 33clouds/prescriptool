@@ -41,7 +41,8 @@ class PrescriptionsController < ApplicationController
 
   def archive
     authorize @prescription
-    @prescription.update(prescription_params)
+    @prescription.archive
+    redirect_to prescriptions_path
   end
 
   def archived
@@ -51,27 +52,18 @@ class PrescriptionsController < ApplicationController
   end
 
   def new
-    @prescription = Prescription.new
-    @prescription.professional = current_user
-    @prescription.meds_prescriptions.build
-    @meds_prescription = MedsPrescription.new
-    # @prescription = current_user.prescriptions_as_professional.new
+    @prescription = current_user.prescriptions_as_professional.new
+    2.times.each do
+      @prescription.meds_prescriptions.build
+    end
     authorize @prescription
   end
 
   def create
-    @prescription = Prescription.new(prescription_params)
-    @prescription.professional = current_user
-    @meds_prescription = MedsPrescription.new
+    @prescription = current_user.prescriptions_as_professional.new(prescription_params)
     authorize @prescription
 
     if @prescription.save
-      @md = MedsPrescription.new
-      @md.dosage = params[:prescription][:meds_prescription][:dosage]
-      @md.refill = params[:prescription][:meds_prescription][:refill]
-      @md.med = Med.find params[:prescription][:meds_prescription][:med_id]
-      @md.prescription = @prescription
-      @md.save
       redirect_to prescriptions_path
     else
       render :new, status: :unprocessable_entity
@@ -81,7 +73,15 @@ class PrescriptionsController < ApplicationController
   private
 
   def prescription_params
-    params.require(:prescription).permit(:patient_id, :archived)
+    params.require(:prescription).permit(
+      :patient_id,
+      :archived,
+      meds_prescriptions_attributes: [
+        :med_id,
+        :dosage,
+        :refill
+      ]
+    )
   end
 
   def find_by_id

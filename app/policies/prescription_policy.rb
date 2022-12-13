@@ -16,7 +16,7 @@ class PrescriptionPolicy < ApplicationPolicy
 
   def archived?
     record.each do |r|
-      return false unless r.patient == user
+      return false unless r.patient == user || r.professional == user
     end
     return true
   end
