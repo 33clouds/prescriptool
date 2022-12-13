@@ -5,6 +5,9 @@
     <%= f.simple_fields_for @meds_prescription do |f| %>
       <%= f.association :med, collection: Med.all %>
       <%= f.input :dosage, collection: Prescription::DOSAGE %>
+      <%= f.association :med, collection: Med.all %>
+      <%= f.input :dosage, collection: Prescription::DOSAGE %>
+      <%= f.input :refill, collection: (0..3) %>
     <% end %>
     <div class="container-button">
       <%= f.button :submit, class: 'btn btn-primary'%>

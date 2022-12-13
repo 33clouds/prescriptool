@@ -13,7 +13,10 @@
           <p id="p1"> Please deliver to: <%= prescription.patient.first_name%> <%=prescription.patient.last_name %> </p>
           <% prescription.meds_prescriptions.each do |med_prescription| %>
             <%= med_prescription.med.name %>
-            <%= med_prescription.dosage %>
+            <%= med_prescription.dosage%>
+            <div class="refill-item">
+              <p><%= med_prescription.refill%>time(s)</p>
+            </div>
           <% end %>
         </div>
         <%= link_to "Select this prescription", prescription_path(prescription), class: "btn btn-gradient" %>
@@ -34,6 +37,9 @@
           <% prescription.meds_prescriptions.each do |med_prescription| %>
             <%= med_prescription.med.name %>
             <%= med_prescription.dosage %>
+            <div class="refill-item">
+              <p><%= med_prescription.refill%>time(s)</p>
+            </div>
           <% end %>
         </div>
         <%= link_to "Select this prescription", prescription_path(prescription), class: "btn btn-gradient" %>

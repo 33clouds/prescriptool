@@ -1,4 +1,5 @@
 require "rqrcode"
+# require "./meds_prescriptions"
 
 class PrescriptionsController < ApplicationController
   before_action :find_by_id, only: [:show, :archive]
@@ -18,11 +19,10 @@ class PrescriptionsController < ApplicationController
   def archive
     authorize @prescription
     @prescription.update(prescription_params)
-    redirect_to archived_prescriptions_path, notice: "Prescription scanned!"
   end
 
   def archived
-    @prescriptions = current_user.prescriptions_as_patient.archived
+    current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
     authorize @prescriptions
   end
 
@@ -44,6 +44,7 @@ class PrescriptionsController < ApplicationController
     if @prescription.save
       @md = MedsPrescription.new
       @md.dosage = params[:prescription][:meds_prescription][:dosage]
+      @md.refill = params[:prescription][:meds_prescription][:refill]
       @md.med = Med.find params[:prescription][:meds_prescription][:med_id]
       @md.prescription = @prescription
       @md.save
@@ -60,7 +61,8 @@ class PrescriptionsController < ApplicationController
   end
 
   def find_by_id
-    @prescription = current_user.prescriptions_as_patient.find(params[:id])
+    # @prescription = current_user.prescriptions_as_patient.find(params[:id])
+    current_user.pro ? @prescription = current_user.prescriptions_as_professional.find(params[:id]) : @prescription = current_user.prescriptions_as_patient.find(params[:id])
   end
 
   def create_string(prescription)
