@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :users_specialties
   has_many :specialties, through: :users_specialties
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+
   include PgSearch::Model
   multisearchable against: [:first_name, :last_name]
 
