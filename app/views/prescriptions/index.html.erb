@@ -21,7 +21,7 @@
       </div>
     <% end %>
     <% @my_prescribed.each do |prescription| %>
-      <div class="card">
+      <div class="card" data-action="click->prescription-list#toggle" data-prescription-list-target="card">
         <div class="title">
           <h6>Prescription</h6>
           <%= image_tag "qrcode.jpeg", class: "qrcode" %>
