@@ -20,4 +20,12 @@ class PrescriptionPolicy < ApplicationPolicy
     end
     return true
   end
+
+  def new?
+    create?
+  end
+
+  def create?
+    @user.pro?
+  end
 end
