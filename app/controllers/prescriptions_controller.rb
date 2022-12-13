@@ -38,6 +38,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def find_by_id
+    // @prescription = current_user.prescriptions_as_patient.find(params[:id])
     current_user.pro ? @prescription = current_user.prescriptions_as_professional.find(params[:id]) : @prescription = current_user.prescriptions_as_patient.find(params[:id])
   end
 
