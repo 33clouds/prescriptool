@@ -17,6 +17,15 @@
           <li class="nav-item dropdown">
             <%= image_tag "user_pic.svg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%# greeting %>
+              <span class="dropdown-item">Hello,
+                <% if current_user.pro? %>
+                  <strong>Dr. <%= current_user.last_name %> 💊</strong>
+                <% else %>
+                  <strong><%= current_user.first_name %> 👑</strong>
+                <% end %>
+              </span>
+              <div class="dropdown-divider"></div>
               <%= link_to "Archived prescriptions", archived_prescriptions_path , class: "dropdown-item" %>
               <% if @current_user.pro? %>
                 <%= link_to "Create a new prescription", new_prescription_path, class: "dropdown-item" %>
