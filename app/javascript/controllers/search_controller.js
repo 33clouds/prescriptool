@@ -7,7 +7,6 @@ export default class extends Controller {
   }
 
   expand() {
-    console.log("From expand")
     this.navbarTarget.classList.toggle('d-none')
     this.searchnavbarTarget.classList.toggle('d-none')
   }
