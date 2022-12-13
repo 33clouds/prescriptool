@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :users_specialties
   has_many :specialties, through: :users_specialties
 
+  include PgSearch::Model
+  multisearchable against: [:first_name, :last_name]
+
   scope :patients, -> { where(pro: false) }
 
   def full_name
