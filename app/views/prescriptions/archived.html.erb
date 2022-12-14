@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
-  <div class="cards">
+  <div class="cards" data-controller="prescription-list">
     <% @prescriptions.each do |prescription| %>
-      <div class="card">
+      <div class="card" data-action="click->prescription-list#toggleItem" data-prescription-list-target="card">
         <div class="title">
           <h6>Prescription</h6>
         </div>
