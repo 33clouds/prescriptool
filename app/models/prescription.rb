@@ -1,5 +1,13 @@
 class Prescription < ApplicationRecord
-  DOSAGE = ["one pill every morning for one month", "two pills during lunch for two weeks", "one pill before sleeping during six months", "one pill two hours before eating for one week"]
+  DOSAGE = [
+    "one pill every morning for one month",
+    "two pills during lunch for two weeks",
+    "one pill before sleeping during six months",
+    "one pill two hours before eating for one week",
+    "500mg, 2pills, every 6 hours",
+    "20mg, 1pill, one hour before lunch"
+  ]
+
   belongs_to :professional, class_name: "User"
   belongs_to :patient, class_name: "User"
 
