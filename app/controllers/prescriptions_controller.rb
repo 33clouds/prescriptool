@@ -16,13 +16,23 @@ class PrescriptionsController < ApplicationController
       end
       @results.each do |result|
         if result.searchable_type == "User"
-          @prescriptions = policy_scope(Prescription).where(professional: result.searchable, patient: current_user)
-        else
-          @prescriptions = result.searchable.prescriptions.where(patient: current_user)
+          if current_user.pro?
+            @prescriptions_pro = policy_scope(Prescription).where(patient: result.searchable, professional: current_user)
+          else
+            @prescriptions = policy_scope(Prescription).where(professional: result.searchable, patient: current_user)
+          end
+        elsif result.searchable_type == "Med"
+          if current_user.pro?
+            @prescriptions_pro = result.searchable.prescriptions.where(professional: current_user)
+            # raise
+          else
+            @prescriptions = result.searchable.prescriptions.where(patient: current_user)
+          end
         end
       end
     else
       @prescriptions = current_user.prescriptions_as_patient.active
+      @prescriptions_pro = current_user.prescriptions_as_professional.active
     end
   end
 
@@ -39,9 +49,11 @@ class PrescriptionsController < ApplicationController
   end
 
   def archived
+    @prescriptions = policy_scope(Prescription)
     # @prescriptions = current_user.prescriptions_as_patient.archived
+    # current_user.pro ? @prescriptions = policy_scope(Prescription).where(archived: true, professional: current_user) : @prescriptions = policy_scope(Prescription).where(archived: true, patient: current_user)
     current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
-    authorize @prescriptions
+    # authorize @prescriptions
   end
 
   def new
