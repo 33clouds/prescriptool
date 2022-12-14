@@ -1,9 +1,9 @@
+<% content_for :meta_title, "Your prescriptions" %>
 <div class="row justify-content-center">
   <div class="cards" data-controller="prescription-list">
     <% current_user.pro ? prescriptions = @prescriptions_pro : prescriptions = @prescriptions %>
     <% prescriptions.each do |prescription| %>
       <div class="card" data-action="click->prescription-list#toggleItem" data-prescription-list-target="card">
-
         <p>Dr. <%= prescription.professional.last_name%></p>
         <p><%= prescription.created_at.strftime('%a %d %b %Y') %></p>
         <div class="preview">
@@ -11,50 +11,44 @@
             <p><i class="fa-solid fa-pills"></i> <%= med_prescription.med.name %></p>
           <% end %>
         </div>
-
         <div class="content">
           <% prescription.meds_prescriptions.each do |med_prescription| %>
             <p><i class="fa-solid fa-pills"></i> <%= med_prescription.med.name %></p>
             <p>Directions <%= med_prescription.dosage %></p>
             <div class="refill-item">
-              <p><%= med_prescription.refill%>time(s)</p>
+              <p><%= pluralize(med_prescription.refill,'time')%></p>
             </div>
           <% end %>
-
           <p>Please deliver to: <%= prescription.patient.first_name %> <%=prescription.patient.last_name %> </p>
           <p>Dr. <%= prescription.professional.last_name%> <%= prescription.professional.address %></p>
-
           <% if !prescription.archived? && current_user.pro  %>
             <div class="container-button-archived">
               <%= link_to "ARCHIVE", archive_prescription_path(prescription), class: "btn btn-gradient" %>
             </div>
           <% end %>
-
           <p>#<%= prescription.id %></p>
           <a href="#"
              data-action="click->prescription-list#swallow"
-             data-bs-toggle="modal" data-bs-target="#showQrModal" data-id="<%= prescription.id %>"
-          >
+            data-bs-toggle="modal" data-bs-target="#showQrModal" data-id="<%= prescription.id %>"
+            >
             <%= image_tag "qrcode.jpeg", class: "qrcode" %>
           </a>
         </div>
       </div>
     <% end %>
-
-     <div class="modal fade" id="showQrModal" tabindex="-1" aria-hidden="true"
+    <div class="modal fade" id="showQrModal" tabindex="-1" aria-hidden="true"
           data-action="show.bs.modal->prescription-list#onModalShow"
-     >
-        <div class="modal-dialog d-flex justify-content-center w-full mt-4">
-          <div class="modal-content w-60 rounded-4">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex justify-content-center p-3">
-              <img data-prescription-list-target="modalqr">
-            </div>
+      >
+      <div class="modal-dialog d-flex justify-content-center w-full mt-4">
+        <div class="modal-content w-60 rounded-4">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-center p-3">
+            <img data-prescription-list-target="modalqr">
           </div>
         </div>
       </div>
-
+    </div>
   </div>
 </div>
