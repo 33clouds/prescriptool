@@ -2,7 +2,7 @@ class PrescriptionPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      scope.where(patient: user)
+      user.pro ? scope.where(professional: user) : scope.where(patient: user)
     end
   end
 

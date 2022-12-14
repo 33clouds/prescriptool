@@ -11,7 +11,10 @@
         </div>
       </div>
     <% end %>
-    <div data-action="click->search#expand"><a class="my-2 my-sm-0"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+    <% if user_signed_in? %>
+    <div data-action="click->search#expand"><a class="my-2 my-sm-0"><i class="fa-solid fa-magnifying-glass"></i></a>
+    </div>
+    <% end %>
     <div id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -30,9 +33,8 @@
               <%= link_to "Archived prescriptions", archived_prescriptions_path , class: "dropdown-item" %>
               <% if @current_user.pro? %>
                 <%= link_to "Create a new prescription", new_prescription_path, class: "dropdown-item" %>
-              <% else %>
-                <%= link_to "Messages", "#", class: "dropdown-item" %>
               <% end %>
+              <%= link_to "Notifications", notifications_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>

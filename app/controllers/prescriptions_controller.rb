@@ -11,25 +11,29 @@ class PrescriptionsController < ApplicationController
     if params[:query].present?
       @query = params[:query]
       @results = PgSearch.multisearch(@query)
-      @prescriptions = []
       if @results.empty?
         @prescriptions = current_user.prescriptions_as_patient.active
         flash[:alert] = "No results found. Please try again."
       end
       @results.each do |result|
         if result.searchable_type == "User"
-          tmp = Prescription.where(professional: result.searchable, patient: current_user)
-          tmp.each do |prescription|
-            @prescriptions << prescription
+          if current_user.pro?
+            @prescriptions_pro = policy_scope(Prescription).where(patient: result.searchable, professional: current_user)
+          else
+            @prescriptions = policy_scope(Prescription).where(professional: result.searchable, patient: current_user)
           end
-        else
-          result.searchable.meds_prescriptions.each do |meds_prescription|
-            @prescriptions << meds_prescription.prescription if meds_prescription.prescription.patient == current_user
+        elsif result.searchable_type == "Med"
+          if current_user.pro?
+            @prescriptions_pro = result.searchable.prescriptions.where(professional: current_user)
+            # raise
+          else
+            @prescriptions = result.searchable.prescriptions.where(patient: current_user)
           end
         end
       end
     else
       @prescriptions = current_user.prescriptions_as_patient.active
+      @prescriptions_pro = current_user.prescriptions_as_professional.active
     end
   end
 
@@ -52,6 +56,7 @@ class PrescriptionsController < ApplicationController
   end
 
   def archived
+    @prescriptions = policy_scope(Prescription)
     # @prescriptions = current_user.prescriptions_as_patient.archived
     policy_scope(Prescription)
     current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
@@ -70,6 +75,7 @@ class PrescriptionsController < ApplicationController
     authorize @prescription
 
     if @prescription.save
+      @notification = Notification.create(user: @prescription.patient, message: "You have a new prescription from Dr #{current_user.last_name}")
       redirect_to prescriptions_path
     else
       render :new, status: :unprocessable_entity
