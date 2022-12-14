@@ -1,5 +1,4 @@
 require "rqrcode"
-# require "./meds_prescriptions"
 
 class PrescriptionsController < ApplicationController
   before_action :find_by_id, only: [:show, :archive, :qr]
