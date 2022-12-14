@@ -1,7 +1,8 @@
 require "rqrcode"
+# require "./meds_prescriptions"
 
 class PrescriptionsController < ApplicationController
-  before_action :find_by_id, only: %i[show archive]
+  before_action :find_by_id, only: [:show, :archive, :qr]
 
   def index
     @prescriptions = policy_scope(Prescription)
@@ -42,42 +43,39 @@ class PrescriptionsController < ApplicationController
     # qrcode = RQRCode::QRCode.new("#{request.base_url}/prescriptions/#{@prescription.id}")
   end
 
+  def qr
+    authorize @prescription
+    createqr_code(create_string(@prescription))
+    render plain: @svg_big.html_safe, content_type: 'image/svg+xml'
+  end
+
   def archive
     authorize @prescription
-    @prescription.update(prescription_params)
-    redirect_to archived_prescriptions_path, notice: "Prescription scanned!"
+    @prescription.archive
+    redirect_to prescriptions_path
   end
 
   def archived
     @prescriptions = policy_scope(Prescription)
     # @prescriptions = current_user.prescriptions_as_patient.archived
-    # current_user.pro ? @prescriptions = policy_scope(Prescription).where(archived: true, professional: current_user) : @prescriptions = policy_scope(Prescription).where(archived: true, patient: current_user)
+    policy_scope(Prescription)
     current_user.pro ? @prescriptions = current_user.prescriptions_as_professional.archived : @prescriptions = current_user.prescriptions_as_patient.archived
-    # authorize @prescriptions
   end
 
   def new
-    @prescription = Prescription.new
-    @prescription.professional = current_user
-    @prescription.meds_prescriptions.build
-    @meds_prescription = MedsPrescription.new
-    # @prescription = current_user.prescriptions_as_professional.new
+    @prescription = current_user.prescriptions_as_professional.new
+    2.times.each do
+      @prescription.meds_prescriptions.build
+    end
     authorize @prescription
   end
 
   def create
-    @prescription = Prescription.new(prescription_params)
-    @prescription.professional = current_user
-    @meds_prescription = MedsPrescription.new
+    @prescription = current_user.prescriptions_as_professional.new(prescription_params)
     authorize @prescription
 
     if @prescription.save
       @notification = Notification.create(user: @prescription.patient, message: "You have a new prescription from Dr #{current_user.last_name}")
-      @md = MedsPrescription.new
-      @md.dosage = params[:prescription][:meds_prescription][:dosage]
-      @md.med = Med.find params[:prescription][:meds_prescription][:med_id]
-      @md.prescription = @prescription
-      @md.save
       redirect_to prescriptions_path
     else
       render :new, status: :unprocessable_entity
@@ -87,7 +85,15 @@ class PrescriptionsController < ApplicationController
   private
 
   def prescription_params
-    params.require(:prescription).permit(:patient_id, :archived)
+    params.require(:prescription).permit(
+      :patient_id,
+      :archived,
+      meds_prescriptions_attributes: [
+        :med_id,
+        :dosage,
+        :refill
+      ]
+    )
   end
 
   def find_by_id
