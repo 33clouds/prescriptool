@@ -64,10 +64,13 @@ User.where(pro: false).each do |user|
 
     puts "> Created prescription #{p.inspect}"
 
-    p.meds_prescriptions.create!(
-      med: Med.all.sample,
-      dosage: @dosages.sample
-    )
+    Med.all.sample(rand(1..3)).each do |med|
+      p.meds_prescriptions.create!(
+        med: med,
+        dosage: @dosages.sample,
+        refill: rand(0..3)
+      )
+    end
 
     puts "> Assigned meds prescription #{p.meds_prescriptions.map(&:id)} to prescription #{p.inspect}"
   end
