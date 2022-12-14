@@ -82,3 +82,7 @@ group :test do
 end
 
 gem "faker", "~> 3.0"
+
+# mailing
+gem 'letter_opener', group: :development
+gem 'postmark-rails'
