@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :prescriptions, only: %i[index show new create] do
     member do
-      patch :archive
+      get :qr
+      get :archive
     end
     collection do
       get :archived
     end
   end
+  resources :notifications, only: %i[index]
 
   root to: "pages#home"
 

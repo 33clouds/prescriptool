@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag "favicon.ico", rel: "icon", type: "image/png" %>
     <title>Prescriptool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,15 +14,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
   </head>
-
   <body>
     <%= render "shared/navbar" %>
     <%# navbar in shared/_navbar.html.erb %>
-
     <%= render "shared/flashes" %>
-
     <%= yield %>
-
     <%= render "shared/footer" %>
   </body>
 </html>

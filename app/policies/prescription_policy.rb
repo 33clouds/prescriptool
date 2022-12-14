@@ -2,13 +2,16 @@ class PrescriptionPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      scope.where(patient: user)
-      # scope.all
+      user.pro ? scope.where(professional: user) : scope.where(patient: user)
     end
   end
 
   def show?
-    true
+    record.patient == user || record.professional == user
+  end
+
+  def qr?
+    show?
   end
 
   def archive?
@@ -16,7 +19,10 @@ class PrescriptionPolicy < ApplicationPolicy
   end
 
   def archived?
-    show?
+    record.each do |r|
+      return false unless r.patient == user || r.professional == user
+    end
+    return true
   end
 
   def new?

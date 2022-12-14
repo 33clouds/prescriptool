@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_204115) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_161950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,8 +26,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_204115) do
     t.bigint "med_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "refill", default: 0
     t.index ["med_id"], name: "index_meds_prescriptions_on_med_id"
     t.index ["prescription_id"], name: "index_meds_prescriptions_on_prescription_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
   create_table "prescriptions", force: :cascade do |t|
@@ -74,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_204115) do
 
   add_foreign_key "meds_prescriptions", "meds"
   add_foreign_key "meds_prescriptions", "prescriptions"
+  add_foreign_key "notifications", "users"
   add_foreign_key "prescriptions", "users", column: "patient_id"
   add_foreign_key "prescriptions", "users", column: "professional_id"
   add_foreign_key "users_specialties", "specialties"

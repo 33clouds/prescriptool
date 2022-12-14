@@ -15,8 +15,7 @@ Prescription.destroy_all
 User.destroy_all
 Med.destroy_all
 
-@dosages = ["one pill every morning for one month", "two pills during lunch for two weeks", "one pill before sleeping during six months", "one pill two hours before eating for one week"]
-@meds = ["PARACETAMOL", "IBUPROFEN", "ASPIRIN", "ANXIOLITIC", "AMOXICCILIN", "ANTIHISTAMIN", "LOVENOX", "PYOSTACIN"]
+@meds = ["PARACETAMOL", "IBUPROFEN", "ASPIRIN", "ANXIOLITIC", "AMOXICCILIN", "ANTIHISTAMIN", "CLOPIDOGREL", "PYOSTACIN"]
 @specialties = ["CARDIOLOGIST", "RHEUMATOLOGIST", "RADIOLOGIST", "GP", "OPHTALMOLOGIST", "DERMATOLOGIST"]
 
 User.create!(first_name: "Julie", last_name: "Filstroff", email: "julie@gmail.com", password: "123456", pro: true, address: Faker::Address.full_address)
@@ -64,10 +63,13 @@ User.where(pro: false).each do |user|
 
     puts "> Created prescription #{p.inspect}"
 
-    p.meds_prescriptions.create!(
-      med: Med.all.sample,
-      dosage: @dosages.sample
-    )
+    Med.all.sample(rand(1..3)).each do |med|
+      p.meds_prescriptions.create!(
+        med: med,
+        dosage: Prescription::DOSAGE.sample,
+        refill: rand(0..3)
+      )
+    end
 
     puts "> Assigned meds prescription #{p.meds_prescriptions.map(&:id)} to prescription #{p.inspect}"
   end
