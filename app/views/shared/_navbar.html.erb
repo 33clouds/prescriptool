@@ -11,7 +11,10 @@
         </div>
       </div>
     <% end %>
-    <div data-action="click->search#expand"><a class="my-2 my-sm-0"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+    <% if user_signed_in? %>
+    <div data-action="click->search#expand"><a class="my-2 my-sm-0"><i class="fa-solid fa-magnifying-glass"></i></a>
+    </div>
+    <% end %>
     <div id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
