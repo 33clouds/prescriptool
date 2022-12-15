@@ -1,0 +1,18 @@
+{
+  "background_color": "white",
+  "description": "All your prescriptions in one place
+  Tired of losing your prescriptions? We have your back! With Prescriptool, you can access all your prescriptions and search for a particular one.",
+  "display": "fullscreen",
+  "name": "Prescriptool",
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ]
+}
