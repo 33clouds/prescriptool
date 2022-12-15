@@ -1,5 +1,5 @@
 <h3 id="H1"> Doctor, please complete the form below </h3>
-<div class="container-prescription new-prescription">
+<div class="container-prescription">
   <%= simple_form_for @prescription do |f| %>
     <%= f.association :patient, collection: User.patients, label_method: :full_name %>
     <%= f.simple_fields_for :meds_prescriptions do |a| %>
