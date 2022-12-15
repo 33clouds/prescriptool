@@ -1,3 +1,4 @@
 <% content_for :meta_title, "Your prescriptions" %>
+
 <h3>Your prescriptions</h3>
 <%= render "prescriptions/prescriptions", prescriptions: current_user.pro ? @prescriptions_pro : @prescriptions %>
