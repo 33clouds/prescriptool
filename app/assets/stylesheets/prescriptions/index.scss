@@ -2,7 +2,7 @@
   border-radius: 15px;
   background-color: white;
   padding: 20px;
-  margin: 20px;
+  margin-bottom: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -14,10 +14,17 @@
   display: flex;
 }
 
-.qrcode {
-  width: 40px;
-  height: 40px;
-  margin-left: 150px;
+.card {
+  .qrcode {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
 }
 
 .btn-gradient {
@@ -53,17 +60,56 @@
   margin-top: 10px;
 }
 
-.card {
-  .content {
+.card ul {
+  list-style: none;
+  padding-left: 1.5em;
+  margin-bottom: 8px;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+.card:not(.expand) {
+  .details {
     display: none;
   }
 }
 
-.card.expand {
-  .preview {
-    display: none;
+.med-list-bullet {
+  font-size: 80%;
+  margin-right: 4px;
+  margin-left: -21px;
+}
+
+.med-name {
+  font-weight: 500;
+}
+
+.card {
+  .header {
+    display: flex;
+    align-items: center;
+
+   .name {
+      flex-grow: 1;
+    }
+
+    .date {
+      font-size: 12px;
+    }
   }
-  .content {
-    display: block;
+}
+
+.prescriptions-container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 17px;
+  padding-right: 17px;
+
+  h3 {
+    color: $header-color-darkgrey;
+    margin-bottom: 12px;
+    // font-size: 15px;
   }
 }
