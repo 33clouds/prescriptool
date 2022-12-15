@@ -82,13 +82,15 @@ amoxiccilin = Med.find_by(name: "AMOXICCILIN")
 p1 = kevin.prescriptions_as_patient.new
 p1.professional = olga
 p1.created_at = "2022-11-14 09:45:07.077969000 +0000"
+p1.archived = true
 p1.save!
 
 p2 = kevin.prescriptions_as_patient.new
-p2.professional = olga
-p2.created_at = "2022-10-20 09:45:07.077969000 +0000"
+p2.professional = User.where(pro: true).sample
+p2.created_at = "2022-12-04 09:45:07.077969000 +0000"
 p2.save!
-
 
 p1.meds_prescriptions.create!(med: antihistamin, dosage: "two pills during lunch for two weeks")
 p2.meds_prescriptions.create!(med: amoxiccilin, dosage: "500mg three times a day when eating during one week")
+p2.meds_prescriptions.create!(med: Med.all.sample, dosage: Prescription::DOSAGE.sample)
+p2.meds_prescriptions.create!(med: Med.all.sample, dosage: Prescription::DOSAGE.sample)
