@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  match "(*any)",
+  to: redirect( subdomain: "www" ),
+  via: :all,
+  constraints: { subdomain: "" }
+
   devise_for :users
   resources :prescriptions, only: %i[index show new create] do
     member do
