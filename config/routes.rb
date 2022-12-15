@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # prescriptool.com -> www.prescriptool.com
+  match "(*any)",
+  to: redirect( subdomain: "www"),
+  via: :all,
+  constraints: { subdomain: "", domain: "prescriptool.com"  }
+
   devise_for :users
   resources :prescriptions, only: %i[index show new create] do
     member do
