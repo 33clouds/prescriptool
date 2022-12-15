@@ -12,7 +12,7 @@ class Prescription < ApplicationRecord
   belongs_to :patient, class_name: "User"
 
   has_many :meds_prescriptions
-  has_many :meds, through: :meds_prescriptions
+  has_many :meds, through: :meds_prescriptions, dependent: :destroy
 
   default_scope -> { order(created_at: :desc) }
   scope :active, -> { where(archived: false) }
