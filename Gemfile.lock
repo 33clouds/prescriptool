@@ -171,6 +171,11 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    postmark (1.22.2)
+      json
+    postmark-rails (0.22.1)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -289,6 +294,7 @@ DEPENDENCIES
   pg (~> 1.1)
   postmark-rails
   pg_search
+  postmark-rails
   puma (~> 5.0)
   pundit
   rails (~> 7.0.4)
