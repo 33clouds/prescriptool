@@ -2,13 +2,20 @@
   <div class="row justify-content-center">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
       <div class="form-login">
-
         <h2>Sign up</h2>
-
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
           <%= f.error_notification %>
-
           <div class="form-inputs">
+            <%= f.input :first_name,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "first_name" },
+                        placeholder: "John" %>
+            <%= f.input :last_name,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "last_name" },
+                        placeholder: "Doe" %>
             <%= f.input :email,
                         required: true,
                         autofocus: true,
@@ -24,14 +31,11 @@
                         input_html: { autocomplete: "new-password" },
                         placeholder: "******" %>
           </div>
-
           <div class="form-actions">
             <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
           </div>
         <% end %>
-
         <%= render "devise/shared/links" %>
-
       </div>
     </div>
   </div>
