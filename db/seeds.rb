@@ -19,9 +19,9 @@ Med.destroy_all
 @specialties = ["CARDIOLOGIST", "RHEUMATOLOGIST", "RADIOLOGIST", "GP", "OPHTALMOLOGIST", "DERMATOLOGIST"]
 
 User.create!(first_name: "Julie", last_name: "Filstroff", email: "julie@gmail.com", password: "123456", pro: true, address: Faker::Address.full_address)
-User.create!(first_name: "Olga", last_name: "Grigoryeva", email: "olga@gmail.com", password: "123456", pro: true, address: Faker::Address.full_address)
+olga = User.create!(first_name: "Olga", last_name: "Grigoryeva", email: "olga@gmail.com", password: "123456", pro: true, address: Faker::Address.full_address)
 User.create!(first_name: "Rodrigo", last_name: "Borges", email: "rodrigo@gmail.com", password: "123456", address: Faker::Address.full_address)
-User.create!(first_name: "Kevin", last_name: "Gandolfi", email: "kevin@gmail.com", password: "123456", address: Faker::Address.full_address)
+kevin = User.create!(first_name: "Kevin", last_name: "Gandolfi", email: "kevin@gmail.com", password: "123456", address: Faker::Address.full_address)
 
 puts "\nCreating users..."
 10.times do
@@ -56,21 +56,39 @@ end
 
 puts "\nCreating prescriptions..."
 User.where(pro: false).each do |user|
-  10.times do
-    p = user.prescriptions_as_patient.new
-    p.professional = User.where(pro: true).sample
-    p.save!
+  unless user == kevin
+    10.times do
+      p = user.prescriptions_as_patient.new
+      p.professional = User.where(pro: true).sample
+      p.save!
 
-    puts "> Created prescription #{p.inspect}"
+      puts "> Created prescription #{p.inspect}"
 
-    Med.all.sample(rand(1..3)).each do |med|
-      p.meds_prescriptions.create!(
-        med: med,
-        dosage: Prescription::DOSAGE.sample,
-        refill: rand(0..3)
-      )
+      Med.all.sample(rand(1..3)).each do |med|
+        p.meds_prescriptions.create!(
+          med:,
+          dosage: Prescription::DOSAGE.sample,
+          refill: rand(0..3)
+        )
+      end
+      puts "> Assigned meds prescription #{p.meds_prescriptions.map(&:id)} to prescription #{p.inspect}"
     end
-
-    puts "> Assigned meds prescription #{p.meds_prescriptions.map(&:id)} to prescription #{p.inspect}"
   end
 end
+
+antihistamin = Med.find_by(name: "ANTIHISTAMIN")
+amoxiccilin = Med.find_by(name: "AMOXICCILIN")
+
+p1 = kevin.prescriptions_as_patient.new
+p1.professional = olga
+p1.created_at = "2022-11-14 09:45:07.077969000 +0000"
+p1.save!
+
+p2 = kevin.prescriptions_as_patient.new
+p2.professional = olga
+p2.created_at = "2022-10-20 09:45:07.077969000 +0000"
+p2.save!
+
+
+p1.meds_prescriptions.create!(med: antihistamin, dosage: "two pills during lunch for two weeks")
+p2.meds_prescriptions.create!(med: amoxiccilin, dosage: "500mg three times a day when eating during one week")
