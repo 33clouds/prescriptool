@@ -2,7 +2,7 @@
   border-radius: 15px;
   background-color: white;
   padding: 20px;
-  margin: 20px;
+  margin-bottom: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -98,5 +98,18 @@
     .date {
       font-size: 12px;
     }
+  }
+}
+
+.prescriptions-container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 17px;
+  padding-right: 17px;
+
+  h3 {
+    color: $header-color-darkgrey;
+    margin-bottom: 12px;
+    // font-size: 15px;
   }
 }
